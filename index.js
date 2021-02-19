@@ -1,6 +1,7 @@
 let summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange
-errorcheck()
-//function input(){
+input();
+errorcheck();
+function input(){
   summ = process.argv[2];
   percent= process.argv[3];
   length = process.argv[4];
@@ -12,8 +13,15 @@ errorcheck()
     balancechange = balancechange+monthchanges;
     summchange = balancechange - summ;
     percentchange = 1-summ/balancechange;
-//}
+}
+percent=percent/100/12;
+percent=percent.toFixed(2);
+balancechange = summ;
 
+console.log (summ);
+console.log (percent);
+console.log (length);
+console.log (monthchanges);
 function errorcheck(){
   if(process.argv[2] == "help"){
     console.log("<Сумма> <Процент> <Срок> <Пополнение в месяц>")
@@ -30,7 +38,7 @@ function errorcheck(){
   
 }
 
-bank()
+//bank()
 function bank() {
   
   percent=percent/12;

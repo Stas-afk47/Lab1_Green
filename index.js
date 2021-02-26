@@ -1,17 +1,18 @@
-let summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange
+let summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange,errors;
 currentresult=[];
 result=[];
 input();
-if (errorcheck() == 1){
+errors = errorcheck();
+if (errors == 1){
   console.log ("Данные некорректны,для помощи введите 'help'")
 }
-else if (errorcheck() == 2){
+else if (errors == 2){
   console.log("<Сумма> <Процент> <Срок вклада> <Пополнение в месяц>")
 }
 else if(monthchanges>=0) {
   bank()
 }
-  else{
+else{
     bank2()
   }
 function input(){
@@ -27,20 +28,27 @@ console.log ("Процент = "+percent);
 console.log ("Срок вклада = "+length);
 console.log ("Пополнение в месяц = "+monthchanges);
 */
+
 function errorcheck(){
   if(process.argv[2] == "help"){
     return 2
   }
-  else if (0>percent>100) {
+  else if ((0>percent>100) || (Number.isNaN (percent)==true) || percent == undefined) {
+    
     return 1
   }
-  else if (Number.isInteger (summ)==false) {
+  else if ((Number.isNaN (summ)==true) || summ == undefined)   {
+
     return 1
   }
-  else if (Number.isInteger (length)==false) {
+  else if ((Number.isNaN (length)==true) || length == undefined) {
+    
     return 1
   }
-  
+  else if ((Number.isNaN (monthchanges)==true) || monthchanges == undefined) {
+    
+    return 1
+  }
 }
 
 
@@ -82,6 +90,9 @@ function bank2() {
     result.push (currentresult);
     currentresult=[];
     summ=balancechange;
+    if (summ < 0){
+      return console.log ('Снятие с счета превысило депозит')
+    }
   }
   console.log(result);
 }

@@ -6,25 +6,17 @@ function input(){
   percent= process.argv[3];
   length = process.argv[4];
   monthchanges = process.argv[5];
-  percent=percent/100/12;
-  percent=percent.toFixed(2);
-  balancechange = summ;
-    balancechange == balancechange + balancechange*percent;
-    balancechange = balancechange+monthchanges;
-    summchange = balancechange - summ;
-    percentchange = 1-summ/balancechange;
 }
-percent=percent/100/12;
-percent=percent.toFixed(2);
-balancechange = summ;
 
-console.log (summ);
-console.log (percent);
-console.log (length);
-console.log (monthchanges);
+
+console.log ("Сумма = "+summ);
+console.log ("Процент = "+percent);
+console.log ("Срок вклада = "+length);
+console.log ("Пополнение в месяц = "+monthchanges);
+
 function errorcheck(){
   if(process.argv[2] == "help"){
-    console.log("<Сумма> <Процент> <Срок> <Пополнение в месяц>")
+    console.log("<Сумма> <Процент> <Срок вклада> <Пополнение в месяц>")
   }
   else if (0>percent>100) {
     return console.log('Данные некорректны')
@@ -38,21 +30,22 @@ function errorcheck(){
   
 }
 
-//bank()
+bank()
 function bank() {
   
-  percent=percent/12;
-  percent=percent.toFixed(2);
+  percent=percent/12/100;
+  percent=percent.toFixed(3);
   for (let y=0; y<length; y++){
-    balancechange = summ;
-    balancechange = balancechange + balancechange*percent;
-    balancechange = balancechange + monthchanges;
-    summchange = balancechange - summ;
-    percentchange = 1-summ/balancechange;
+    balancechange = Number(summ);
+    balancechange = Number(balancechange) + Number(balancechange)*Number(percent);
+    balancechange = Number(balancechange) + Number(monthchanges);
+    summchange = Number(balancechange) - Number(summ);
+    percentchange = 1-Number(summ)/Number(balancechange);
     console.log(balancechange);
-    currentresult.push ("Текущий баланс = "+balancechange+"Разница за месяц = "+summchange+"Разница за месяц в процентах = "+percentchange);
+    /*currentresult.push ("Текущий баланс = "+balancechange+"Разница за месяц = "+summchange+"Разница за месяц в процентах = "+percentchange);
     result.push (currentresult);
-    currentresult=[];
+    currentresult=[];  
+    */
     summ=balancechange;
   }
 }

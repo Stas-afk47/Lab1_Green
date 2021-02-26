@@ -1,6 +1,19 @@
 let summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange
+currentresult=[];
+result=[];
 input();
-errorcheck();
+if (errorcheck() == 1){
+  console.log ("Данные некорректны,для помощи введите 'help'")
+}
+else if (errorcheck() == 2){
+  console.log("<Сумма> <Процент> <Срок вклада> <Пополнение в месяц>")
+}
+else if(monthchanges>=0) {
+  bank()
+}
+  else{
+    bank2()
+  }
 function input(){
   summ = process.argv[2];
   percent= process.argv[3];
@@ -8,36 +21,29 @@ function input(){
   monthchanges = process.argv[5];
 }
 
-
+/*
 console.log ("Сумма = "+summ);
 console.log ("Процент = "+percent);
 console.log ("Срок вклада = "+length);
 console.log ("Пополнение в месяц = "+monthchanges);
-
+*/
 function errorcheck(){
   if(process.argv[2] == "help"){
-    console.log("<Сумма> <Процент> <Срок вклада> <Пополнение в месяц>")
+    return 2
   }
   else if (0>percent>100) {
-    return console.log('Данные некорректны')
+    return 1
   }
   else if (Number.isInteger (summ)==false) {
-    return console.log('Данные некорректны')
+    return 1
   }
   else if (Number.isInteger (length)==false) {
-    return console.log('Данные некорректны')
+    return 1
   }
   
 }
-currentresult=[];
-result=[];
-if(monthchanges>=0) {
-  bank()
-}
-  else{
-    bank2()
-  }
- 
+
+
 function bank() {
   percent=percent/12/100;
   percent=percent.toFixed(3);
@@ -56,6 +62,7 @@ function bank() {
     currentresult=[];  
     summ=balancechange;
   }
+  console.log(result);
 }
 function bank2() {
   percent=percent/12/100;
@@ -76,5 +83,5 @@ function bank2() {
     currentresult=[];
     summ=balancechange;
   }
+  console.log(result);
 }
-console.log(result);

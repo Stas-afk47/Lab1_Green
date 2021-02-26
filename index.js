@@ -32,14 +32,13 @@ function errorcheck(){
 currentresult=[];
 result=[];
 if(monthchanges>=0) {
-  bank(); console.log("+")
+  bank()
 }
   else{
-    bank2(); console.log("-")
+    bank2()
   }
  
 function bank() {
-  console.log("b1")
   percent=percent/12/100;
   percent=percent.toFixed(3);
   for (let y=0; y<length; y++){
@@ -51,7 +50,7 @@ function bank() {
     percentchange=percentchange.toFixed(2);
     summchange=summchange.toFixed(2);
     balancechange=balancechange.toFixed(2);
-    console.log(balancechange);
+    //console.log(balancechange);
     currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
     result.push (currentresult);
     currentresult=[];  
@@ -59,7 +58,6 @@ function bank() {
   }
 }
 function bank2() {
-  console.log("b2")
   percent=percent/12/100;
   percent=percent.toFixed(3);
 
@@ -72,7 +70,7 @@ function bank2() {
     percentchange=percentchange.toFixed(2);
     summchange=summchange.toFixed(2);
     balancechange=balancechange.toFixed(2);
-    console.log(balancechange);
+    //console.log(balancechange);
     currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
     result.push (currentresult);
     currentresult=[];

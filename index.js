@@ -1,4 +1,4 @@
-let summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange,errors;
+let file, s, summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange,errors;
 currentresult=[];
 result=[];
 input();
@@ -9,12 +9,10 @@ if (errors == 1){
 else if (errors == 2){
   console.log("<Сумма> <Процент> <Срок вклада> <Пополнение в месяц>")
 }
-else if(monthchanges>=0) {
-  bank()
+else (monthchanges>=0);{
+  bank();
 }
-else{
-    bank2()
-  }
+
 function input(){
   summ = process.argv[2];
   percent= process.argv[3];
@@ -60,39 +58,35 @@ function bank() {
     balancechange = Number(balancechange) + Number(balancechange)*Number(percent);
     balancechange = Number(balancechange) + Number(monthchanges);
     summchange = Number(balancechange) - Number(summ);
-    percentchange = 1-Number(summ)/Number(balancechange);
+    (balancechange>0) ? percentchange = 1-Number(summ)/Number(balancechange) : percentchange = 1 - Number(balancechange) / Number(summ);
     percentchange=percentchange.toFixed(2);
     summchange=summchange.toFixed(2);
     balancechange=balancechange.toFixed(2);
-    //console.log(balancechange);
-    currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
+    currentresult = {   
+      currentBalance: balancechange, 
+      balanceChange: summchange,
+      percentchange: percentchange * 100     
+    }
     result.push (currentresult);
-    currentresult=[];  
-    summ=balancechange;
-  }
-  console.log(result);
-}
-function bank2() {
-  percent=percent/12/100;
-  percent=percent.toFixed(3);
-
-  for (let y=0; y<length; y++){
-    balancechange = Number(summ);
-    balancechange = Number(balancechange) + Number(balancechange)*Number(percent);
-    balancechange = Number(balancechange) + Number(monthchanges);
-    summchange = Number(balancechange) - Number(summ);
-    percentchange = 1-Number(balancechange)/Number(summ);
-    percentchange=percentchange.toFixed(2);
-    summchange=summchange.toFixed(2);
-    balancechange=balancechange.toFixed(2);
-    //console.log(balancechange);
-    currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
-    result.push (currentresult);
-    currentresult=[];
+    currentresult={};  
     summ=balancechange;
     if (summ < 0){
       return console.log ('Снятие с счета превысило депозит')
     }
   }
-  console.log(result);
 }
+
+output (result);
+
+function output (result) {
+
+  const fs = require ("fs");
+  fs.writeFileSync ("output.csv", "Месяц; Текущий баланс; Разница за месяц; Разница за месяц в процентах;", 'utf-8');
+
+  for (let x = 0; x < result.length; x++) { 
+    s = x + 1;
+    //console.log ('Месяц = ' + s + ' Текущий баланс = ' + result[x].currentBalance + ' Разница за месяц = ' + result[x].balanceChange + ' Разница за месяц в процентах = ' + percentchange);
+    file =  s + '; ' + result[x].currentBalance + '; ' + result[x].balanceChange + '; ' + percentchange * 100;
+    fs.appendFileSync ("output.csv", `\n${file}`);
+  }
+} 

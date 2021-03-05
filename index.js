@@ -81,7 +81,7 @@ function bank2() {
     balancechange = Number(balancechange) + Number(balancechange)*Number(percent);
     balancechange = Number(balancechange) + Number(monthchanges);
     summchange = Number(balancechange) - Number(summ);
-    percentchange = 1-Number(balancechange)/Number(summ);
+    percentchange = 1 - Number(balancechange) / Number(summ);
     percentchange=percentchange.toFixed(2);
     summchange=summchange.toFixed(2);
     balancechange=balancechange.toFixed(2);

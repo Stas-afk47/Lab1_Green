@@ -62,35 +62,10 @@ function bank() {
     percentchange=percentchange.toFixed(2);
     summchange=summchange.toFixed(2);
     balancechange=balancechange.toFixed(2);
-    //console.log(balancechange);
     currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
     result.push (currentresult);
     currentresult=[];  
     summ=balancechange;
-<<<<<<< HEAD
-=======
-  }
-  console.log(result);
-}
-function bank2() {
-  percent=percent/12/100;
-  percent=percent.toFixed(3);
-
-  for (let y=0; y<length; y++){
-    balancechange = Number(summ);
-    balancechange = Number(balancechange) + Number(balancechange)*Number(percent);
-    balancechange = Number(balancechange) + Number(monthchanges);
-    summchange = Number(balancechange) - Number(summ);
-    percentchange = 1 - Number(balancechange) / Number(summ);
-    percentchange=percentchange.toFixed(2);
-    summchange=summchange.toFixed(2);
-    balancechange=balancechange.toFixed(2);
-    //console.log(balancechange);
-    currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
-    result.push (currentresult);
-    currentresult=[];
-    summ=balancechange;
->>>>>>> 9a5a1a22443116dd023a0fedba311284b0c93972
     if (summ < 0){
       return console.log ('Снятие с счета превысило депозит')
     }

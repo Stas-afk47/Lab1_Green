@@ -62,13 +62,16 @@ function bank() {
     percentchange=percentchange.toFixed(2);
     summchange=summchange.toFixed(2);
     balancechange=balancechange.toFixed(2);
-    currentresult.push ("Текущий баланс = "+balancechange,"Разница за месяц = "+summchange,"Разница за месяц в процентах = "+percentchange*100);
+    currentresult = {   
+      currentBalance: balancechange, 
+      balanceChange: summchange,
+      percentchange: percentchange * 100     
+    }
     result.push (currentresult);
-    currentresult=[];  
+    currentresult={};  
     summ=balancechange;
     if (summ < 0){
       return console.log ('Снятие с счета превысило депозит')
     }
   }
-  console.log(result);
 }

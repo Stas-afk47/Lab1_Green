@@ -1,4 +1,4 @@
-let summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange,errors;
+let file, s, summ,percent,length,monthchanges,balancechange,percentchange,currentresult,result,summchange,errors;
 currentresult=[];
 result=[];
 input();
@@ -75,3 +75,18 @@ function bank() {
     }
   }
 }
+
+output (result);
+
+function output (result) {
+
+  const fs = require ("fs");
+  fs.writeFileSync ("output.csv", "Месяц; Текущий баланс; Разница за месяц; Разница за месяц в процентах;", 'utf-8');
+
+  for (let x = 0; x < result.length; x++) { 
+    s = x + 1;
+    //console.log ('Месяц = ' + s + ' Текущий баланс = ' + result[x].currentBalance + ' Разница за месяц = ' + result[x].balanceChange + ' Разница за месяц в процентах = ' + percentchange);
+    file =  s + '; ' + result[x].currentBalance + '; ' + result[x].balanceChange + '; ' + percentchange * 100;
+    fs.appendFileSync ("output.csv", `\n${file}`);
+  }
+} 
